@@ -3,6 +3,7 @@ package model.entities;
 import model.enums.OrderStatus;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -10,7 +11,7 @@ public class Order {
     private Integer tableNumber;
     private OrderStatus status;
     private LocalTime time;
-    private List<OrderItem> items;
+    private List<OrderItem> items = new ArrayList<>();
 
     public Order(Integer tableNumber) {
         this.tableNumber = tableNumber;

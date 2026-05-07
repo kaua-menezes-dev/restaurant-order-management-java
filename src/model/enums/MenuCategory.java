@@ -4,7 +4,7 @@ public enum MenuCategory {
 
     ENTRACE,
     MAIN_COURSE,
-    DRINK,
+    BEVERAGE,
     DESSERT;
 
 }
