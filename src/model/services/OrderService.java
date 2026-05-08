@@ -1,5 +1,6 @@
 package model.services;
 
+import model.entities.MenuItem;
 import model.entities.Order;
 import model.entities.OrderItem;
 import model.exceptions.InvalidQuantityException;
@@ -9,7 +10,55 @@ import java.time.LocalTime;
 
 public class OrderService {
 
-    private boolean isHappyHour(LocalTime time){
+    public Order createOrder(int tableNumber) {
+
+        validateTable(tableNumber);
+        Order order = new Order(tableNumber);
+
+        return order;
+
+    }
+
+    public void addItem(Order order, MenuItem item, int quantity) {
+
+        validateQuantity(quantity);
+
+        OrderItem orderItem = new OrderItem(quantity, item);
+        order.addItem(orderItem);
+
+    }
+
+    public double calculatedSubtotal(Order order) {
+
+        double sum = 0.0;
+
+        for (OrderItem o : order.getItems()) {
+            sum += o.getSubtotal();
+        }
+
+        return sum;
+
+    }
+
+    public double calculatedDiscount(Order order) {
+
+        if (isHappyHour(order.getTime())) {
+            return calculateBeverageDiscount(order);
+        }
+
+        return 0.0;
+
+    }
+
+    public double calculatedServiceFee(Order order) {
+        return calculatedSubtotal(order) * 0.10;
+    }
+
+    public double calculateTotal(Order order) {
+        return calculatedSubtotal(order) + calculatedServiceFee(order) - calculatedDiscount(order);
+    }
+
+    private boolean isHappyHour(LocalTime time) {
 
         int hours = time.getHour();
 
