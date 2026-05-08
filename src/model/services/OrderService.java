@@ -37,7 +37,7 @@ public class OrderService {
 
     private void validateQuantity(int quantity) {
 
-        if (quantity < 0) {
+        if (quantity <= 0) {
             throw new InvalidQuantityException(quantity);
         }
 
@@ -45,7 +45,7 @@ public class OrderService {
 
     private void validateTable(int tableNumber) {
 
-        if (tableNumber < 1 && tableNumber > 50) {
+        if (tableNumber < 1 || tableNumber > 50) {
             throw new InvalidTableException(tableNumber);
         }
 
