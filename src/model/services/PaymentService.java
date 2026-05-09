@@ -7,6 +7,20 @@ import model.exceptions.OrderAlreadyPaidException;
 
 public class PaymentService {
 
+
+    public void processPayment(Order order, PaymentMethod method) {
+
+        validatePayment(order);
+
+        OrderService orderService = new OrderService();
+        orderService.calculateTotal(order);
+
+        order.setPaymentMethod(method);
+
+        updateStatus(order);
+
+    }
+
     private void validatePayment(Order order) {
 
         if (order.isPaid()) {
