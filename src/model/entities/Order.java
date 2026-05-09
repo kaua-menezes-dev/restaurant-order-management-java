@@ -1,6 +1,7 @@
 package model.entities;
 
 import model.enums.OrderStatus;
+import model.enums.PaymentMethod;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -12,11 +13,20 @@ public class Order {
     private OrderStatus status;
     private LocalTime time;
     private List<OrderItem> items = new ArrayList<>();
+    private PaymentMethod paymentMethod;
 
     public Order(Integer tableNumber) {
         this.tableNumber = tableNumber;
         this.status = OrderStatus.PENDING;
         this.time = LocalTime.now();
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public void setStatus(OrderStatus status) {
