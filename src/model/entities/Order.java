@@ -15,6 +15,8 @@ public class Order {
     private List<OrderItem> items = new ArrayList<>();
     private PaymentMethod paymentMethod;
 
+    public Order(){}
+
     public Order(Integer tableNumber) {
         this.tableNumber = tableNumber;
         this.status = OrderStatus.PENDING;
